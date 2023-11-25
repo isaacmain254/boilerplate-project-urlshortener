@@ -35,7 +35,8 @@ app.get("/", function (req, res) {
 app.post("/api/shorturl", (req, res) => {
   const bodyurl = req.body.url;
   console.log(bodyurl);
-  dns.lookup(bodyurl, (err, address, family) => {
+  const checkaddress = dns.lookup(urlparser.parse(bodyurl).hostname, (err, address, family) => {
+    console.log("address: %j family: IPv%s", address, family);
     if (!address) {
       res.json({ error: "invalid url" });
     } else {
