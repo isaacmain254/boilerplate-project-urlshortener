@@ -35,8 +35,8 @@ app.get("/", function (req, res) {
 app.post("/api/shorturl", (req, res) => {
   const bodyurl = req.body.url;
   console.log(bodyurl);
-  const checkaddress = dns.lookup(bodyurl, (err, address, family) => {
-    if (!checkaddress) {
+  dns.lookup(bodyurl, (err, address, family) => {
+    if (!address) {
       res.json({ error: "invalid url" });
     } else {
       let shortUrl = Math.floor(Math.random() * 100000);
